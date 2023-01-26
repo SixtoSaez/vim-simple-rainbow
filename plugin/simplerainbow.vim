@@ -1,15 +1,15 @@
-" commentary.vim - Comment stuff out
+" simplerainbow.vim - Comment stuff out
 " Maintainer:   Tim Pope <http://tpo.pe/>
 " Version:      1.3
-" GetLatestVimScripts: 3695 1 :AutoInstall: commentary.vim
+" GetLatestVimScripts: 3695 1 :AutoInstall: simplerainbow.vim
 
-if exists("g:loaded_commentary") || v:version < 703
+if exists("g:loaded_simplerainbow") || v:version < 703
   finish
 endif
-let g:loaded_commentary = 1
+let g:loaded_simplerainbow = 1
 
 function! s:surroundings() abort
-  return split(get(b:, 'commentary_format', substitute(substitute(substitute(
+  return split(get(b:, 'simplerainbow_format', substitute(substitute(substitute(
         \ &commentstring, '^$', '%s', ''), '\S\zs%s',' %s', '') ,'%s\ze\S', '%s ', '')), '%s', 1)
 endfunction
 
@@ -45,7 +45,7 @@ function! s:go(...) abort
     endif
   endfor
 
-  if get(b:, 'commentary_startofline')
+  if get(b:, 'simplerainbow_startofline')
     let indent = '^'
   else
     let indent = '^\s*'
@@ -74,7 +74,7 @@ function! s:go(...) abort
   let modelines = &modelines
   try
     set modelines=0
-    silent doautocmd User CommentaryPost
+    silent doautocmd User simplerainbowPost
   finally
     let &modelines = modelines
   endtry
@@ -102,20 +102,20 @@ function! s:textobject(inner) abort
   endif
 endfunction
 
-command! -range -bar -bang Commentary call s:go(<line1>,<line2>,<bang>0)
-xnoremap <expr>   <Plug>Commentary     <SID>go()
-nnoremap <expr>   <Plug>Commentary     <SID>go()
-nnoremap <expr>   <Plug>CommentaryLine <SID>go() . '_'
-onoremap <silent> <Plug>Commentary        :<C-U>call <SID>textobject(get(v:, 'operator', '') ==# 'c')<CR>
-nnoremap <silent> <Plug>ChangeCommentary c:<C-U>call <SID>textobject(1)<CR>
-nmap <silent> <Plug>CommentaryUndo :echoerr "Change your <Plug>CommentaryUndo map to <Plug>Commentary<Plug>Commentary"<CR>
+command! -range -bar -bang simplerainbow call s:go(<line1>,<line2>,<bang>0)
+xnoremap <expr>   <Plug>simplerainbow     <SID>go()
+nnoremap <expr>   <Plug>simplerainbow     <SID>go()
+nnoremap <expr>   <Plug>simplerainbowLine <SID>go() . '_'
+onoremap <silent> <Plug>simplerainbow        :<C-U>call <SID>textobject(get(v:, 'operator', '') ==# 'c')<CR>
+nnoremap <silent> <Plug>Changesimplerainbow c:<C-U>call <SID>textobject(1)<CR>
+nmap <silent> <Plug>simplerainbowUndo :echoerr "Change your <Plug>simplerainbowUndo map to <Plug>simplerainbow<Plug>simplerainbow"<CR>
 
-if !hasmapto('<Plug>Commentary') || maparg('gc','n') ==# ''
-  xmap gc  <Plug>Commentary
-  nmap gc  <Plug>Commentary
-  omap gc  <Plug>Commentary
-  nmap gcc <Plug>CommentaryLine
-  nmap gcu <Plug>Commentary<Plug>Commentary
+if !hasmapto('<Plug>simplerainbow') || maparg('gc','n') ==# ''
+  xmap gc  <Plug>simplerainbow
+  nmap gc  <Plug>simplerainbow
+  omap gc  <Plug>simplerainbow
+  nmap gcc <Plug>simplerainbowLine
+  nmap gcu <Plug>simplerainbow<Plug>simplerainbow
 endif
 
 " vim:set et sw=2:
